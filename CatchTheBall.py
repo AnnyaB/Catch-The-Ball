@@ -2,7 +2,7 @@ import pygame
 import random
 import time
 
-# Initialize Pygame
+# Initializing Pygame
 pygame.init()
 
 # Screen dimensions
@@ -10,17 +10,17 @@ WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("2D Catch Ball Game")
 
-# Define colors
+# Defining colors
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-# Define player settings
+# Defining player settings
 player_width = 50
 player_height = 10
 player_speed = 5
 
-# Load sound effects
+# Loading sound effects
 catch_sound = pygame.mixer.Sound("catch_sound.wav")  # Add path to your catch sound file
 wall_hit_sound = pygame.mixer.Sound("wall_hit_sound.wav")  # Add path to your wall hit sound file
 
@@ -118,16 +118,16 @@ while running:
     if player_choice is not None:
         keys = pygame.key.get_pressed()
 
-        # Update players
+        # Updating players
         if player_choice == 'player1':
             player1.update(keys)
         else:
             player2.update(keys)
 
-        # Update ball
+        # Updating ball
         ball.update()
 
-        # Check for collision (catching the ball)
+        # Checking for collision (catching the ball)
         if pygame.sprite.collide_rect(player1, ball):
             ball.x_velocity *= -1
             ball.y_velocity *= -1
@@ -140,26 +140,26 @@ while running:
             score_player2 += 1  # Increment score for Player 2
             catch_sound.play()  # Play catch sound
 
-        # Gradually increase ball speed after every 5 points scored
+        # Gradually increasing ball speed after every 5 points scored
         if score_player1 % 5 == 0 or score_player2 % 5 == 0:
             ball.x_velocity *= 1.1  # Increase speed by 10%
             ball.y_velocity *= 1.1
 
-        # Display score
+        # Displaying score
         score_text = font.render(f"Player 1: {score_player1}  Player 2: {score_player2}", True, (0, 0, 0))
         screen.blit(score_text, (WIDTH // 3, 20))
 
-        # Draw everything
+        # Drawing everything
         all_sprites.draw(screen)
 
-        # Check if 2 minutes have passed
+        # Checking if 2 minutes have passed
         if time.time() - game_start_time > game_duration:
             running = False  # End game after 2 minutes
             text_end = font.render("Game Over! Do you want to play again? (Y/N)", True, (0, 0, 0))
             screen.blit(text_end, (WIDTH // 4, HEIGHT // 3))
             pygame.display.flip()
 
-            # Wait for user input
+            # Waiting for user input
             waiting_for_input = True
             while waiting_for_input:
                 for event in pygame.event.get():
@@ -180,7 +180,7 @@ while running:
 
         pygame.display.flip()
 
-    # Handle events
+    # Handling events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
